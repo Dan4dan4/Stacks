@@ -11,6 +11,8 @@ class OrderNode:
         self.user_id = user_id
         # buy side or sell side
         self.side = side
+        # for historical data maybe
+        self.timestamp =time.time()
 
         # pointers for the doubly linkedlist
         self.next = None
@@ -40,4 +42,21 @@ class PriceLevelList:
             self.tail = node
         self.total_volume += node.quantity
 
-    
+    def remove(self, node):
+        """removes order"""
+
+        # PREVIOUS CASES (head)
+        # if node behind us, tell it to skip us
+        if node.prev:
+            node.prev.next = node.next
+        # if we are head, we remove us and give next node head.
+        else:
+            self.head = node.next
+
+        # NEXT CASES (tail)
+        if node.next:
+            node.next.prev = node.prev
+        # if we are tail, we remove us and give prev node tail
+        else:
+            self.tail = node.prev
+        self.total_volume -= node.quantity
