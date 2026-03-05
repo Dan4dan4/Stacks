@@ -1,6 +1,5 @@
 import time
 
-
 class OrderNode:
     """
     represents a single ORDER or "tick
@@ -17,14 +16,28 @@ class OrderNode:
         self.next = None
         self.prev = None
 
-
 class PriceLevelList:
     """
     represents all orders at a specific price. this is going to create a forest of Doubly linked lists, 
     every diff price level for bids and asks is going to hav their own DLL.
     """
     def __init__(self):
-
         self.head= None
         self.tail = None
         self.total_volume = 0
+
+    def append(self, node):
+        """adds order to tail"""
+
+        # if its empty
+        if not self.head:
+            self.head = node
+            self.tail = node
+        # if dll already exists, find the tail and make it the node
+        else:
+            node.prev = self.tail
+            self.tail.next = node
+            self.tail = node
+        self.total_volume += node.quantity
+
+    
