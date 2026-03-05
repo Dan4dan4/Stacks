@@ -1,5 +1,6 @@
 import time
 
+# object
 class OrderNode:
     """
     represents a single ORDER or "tick
@@ -18,6 +19,7 @@ class OrderNode:
         self.next = None
         self.prev = None
 
+# Doubly Linked List
 class PriceLevelList:
     """
     represents all orders at a specific price. this is going to create a forest of Doubly linked lists, 
